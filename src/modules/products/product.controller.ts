@@ -20,7 +20,7 @@ export class ProductController {
   }
 
   @Post()
-  createProduct(@Body(new ValidationPipe()) productDto: ProductDto): ResponseData<ProductDto> {
+  createProduct(@Body(new ValidationPipe()) productDto: ProductDto): ResponseData<Product> {
     try {
       return new ResponseData<Product>(this.productService.createProduct(productDto), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
     } catch (error) {
@@ -38,20 +38,20 @@ export class ProductController {
   }
 
   @Put('/:id')
-  updateProduct(): ResponseData<string> {
+  updateProduct(@Body() productDto: ProductDto, @Param('id') id: number): ResponseData<Product> {
     try {
-      return new ResponseData<string>(this.productService.updateProduct(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return new ResponseData<Product>(this.productService.updateProduct(productDto, id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
     } catch (error) {
-      return new ResponseData<string>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
     }
   }
 
   @Delete('/:id')
-  deleteProduct(): ResponseData<string> {
+  deleteProduct(@Param('id') id: number): ResponseData<boolean> {
     try {
-      return new ResponseData<string>(this.productService.deleteProduct(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return new ResponseData<boolean>(this.productService.deleteProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
     } catch (error) {
-      return new ResponseData<string>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return new ResponseData<boolean>(null, HttpStatus.ERROR, HttpMessage.ERROR);
     }
   }
 }
