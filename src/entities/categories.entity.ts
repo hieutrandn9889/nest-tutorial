@@ -1,7 +1,8 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
+import { CarsEntity } from './cars.entity';
 
 @Entity('categories')
-export class CategoiresEntity extends BaseEntity {
+export class CategoriesEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -10,4 +11,8 @@ export class CategoiresEntity extends BaseEntity {
 
     @Column()
     description: string;
+
+    @OneToMany(() => CarsEntity, cars => cars.category)
+    @JoinColumn()
+    cars: CarsEntity[]
 }

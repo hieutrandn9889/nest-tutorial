@@ -1,4 +1,5 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { CategoriesEntity } from './categories.entity';
 
 @Entity('cars')
 export class CarsEntity extends BaseEntity {
@@ -13,4 +14,8 @@ export class CarsEntity extends BaseEntity {
 
     @Column()
     category_id: number;
+
+    @ManyToOne(() => CategoriesEntity)
+    @JoinColumn()
+    category: CategoriesEntity;
 }
