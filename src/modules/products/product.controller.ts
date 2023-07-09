@@ -1,57 +1,64 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from "@nestjs/common";
-import { ProductService } from "./product.service";
-import { ResponseData } from "src/global/globalClass";
-import { HttpMessage, HttpStatus } from "src/global/globalEnum";
-import { Product } from "src/models/product.model";
-import { ProductDto } from "src/dto/product.dto";
+import { Controller, Get, Post, Put, Delete, Res, Body, Param } from '@nestjs/common';
+import { ProductService } from './product.service';
+import { Response } from 'express';
+import { ResponseData } from 'src/services/response.service';
+import { ResponseType } from 'src/constant/type';
+import { Product } from '../../models/product.model';
+import { ProductDto } from 'src/dto/product.dto';
+import { ServerMessage, ServerStatus } from 'src/constant/enum';
+import { Public } from 'src/constant/decorator';
 
 @Controller('products')
 export class ProductController {
-
   constructor(private readonly productService: ProductService) {}
 
+  @Public()
   @Get()
-  getProducts(): ResponseData<Product[]> {
+  getProducts(@Res() res: Response): ResponseType<Product> {
     try {
-      return new ResponseData<Product[]>(this.productService.getProducts(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return res.json(new ResponseData(this.productService.findAll(), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
-      return new ResponseData<Product[]>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
   }
 
+  @Public()
   @Post()
-  createProduct(@Body(new ValidationPipe()) productDto: ProductDto): ResponseData<Product> {
+  createProduct(@Body() product: ProductDto, @Res() res: Response): ResponseType<Product> {
     try {
-      return new ResponseData<Product>(this.productService.createProduct(productDto), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return res.json(new ResponseData(this.productService.createProduct(product), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
-      return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
   }
 
+  @Public()
   @Get('/:id')
-  detailProduct(@Param('id') id: number): ResponseData<Product> {
+  detailProduct(@Param('id') id: number, @Res() res: Response): ResponseType<Product> {
     try {
-      return new ResponseData<Product>(this.productService.detailProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return res.json(new ResponseData(this.productService.findById(id), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
-      return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
   }
 
+  @Public()
   @Put('/:id')
-  updateProduct(@Body() productDto: ProductDto, @Param('id') id: number): ResponseData<Product> {
+  updateProduct(@Param('id') id: number, @Body() product: ProductDto, @Res() res: Response): ResponseType<Product> {
     try {
-      return new ResponseData<Product>(this.productService.updateProduct(productDto, id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return res.json(new ResponseData(this.productService.updateProduct(id, product), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
-      return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
   }
 
+  @Public()
   @Delete('/:id')
-  deleteProduct(@Param('id') id: number): ResponseData<boolean> {
+  deleteProduct(@Param('id') id: number, @Res() res: Response): ResponseType<Product> {
     try {
-      return new ResponseData<boolean>(this.productService.deleteProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+      return res.json(new ResponseData(this.productService.deleteProduct(id), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
-      return new ResponseData<boolean>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
   }
 }

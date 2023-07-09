@@ -1,13 +1,13 @@
 export class Product {
-    id?: number;
-    categoryId?: number;
-    productName?: string;
-    price?: number;
+  id?: number;
+  productName?: string;
+  category_id?: number;
+  price?: string;
 
-    constructor({ id, categoryId, productName, price }) {
-        if (id !== null) this.id = id;
-        if (categoryId !== null) this.categoryId = categoryId;
-        if (productName !== null) this.productName = productName;
-        if (price !== null) this.price = price;
-    }
+  constructor({ id, productName, category_id, price }) {
+    if (id !== undefined) this.id = id;
+    if (productName !== undefined) this.productName = productName;
+    if (price !== undefined) this.price = price;
+    if (category_id !== undefined) this.category_id = category_id;
+  }
 }
