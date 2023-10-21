@@ -1,12 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Res, Body, Param } from '@nestjs/common';
-import { ProductService } from './product.service';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { ResponseData } from 'src/services/response.service';
-import { ResponseType } from 'src/constant/type';
-import { Product } from '../../models/product.model';
-import { ProductDto } from 'src/dto/product.dto';
-import { ServerMessage, ServerStatus } from 'src/constant/enum';
 import { Public } from 'src/constant/decorator';
+import { ServerMessage, ServerStatus } from 'src/constant/enum';
+import { ResponseType } from 'src/constant/type';
+import { ProductDto } from 'src/dto/product.dto';
+import { ResponseData } from 'src/services/response.service';
+import { Product } from '../../models/product.model';
+import { ProductService } from './product.service';
 
 @Controller('products')
 export class ProductController {
@@ -57,6 +57,20 @@ export class ProductController {
   deleteProduct(@Param('id') id: number, @Res() res: Response): ResponseType<Product> {
     try {
       return res.json(new ResponseData(this.productService.deleteProduct(id), ServerStatus.OK, ServerMessage.OK));
+    } catch (error) {
+      return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
+    }
+  }
+
+  @Public()
+  @Get('/home/pagination')
+  getHomeProducts(
+    @Query('page') page: string,
+    @Query('search') search: string,
+    @Res() res: Response,
+  ): ResponseType<Product> {
+    try {
+      return res.json(new ResponseData(this.productService.findProductHome({ page, search }), ServerStatus.OK, ServerMessage.OK));
     } catch (error) {
       return res.json(new ResponseData(null, ServerStatus.ERROR, ServerMessage.ERROR));
     }
