@@ -19,25 +19,25 @@ import { RolesGuard } from './modules/auth/roles.guard';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'nestjs-api-v1',
-      entities: [AccountsEntity, CarsEntity, CategoriesEntity],
-      synchronize: true,
-    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: '',
+    //   database: 'nestjs-api-v1',
+    //   entities: [AccountsEntity, CarsEntity, CategoriesEntity],
+    //   synchronize: true,
+    // }),
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,
       signOptions: { expiresIn: 900000 },
     }),
     ProductModule,
-    CategoryModule,
-    CarModule,
-    AuthModule,
+    // CategoryModule,
+    // CarModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [
@@ -55,7 +55,7 @@ import { RolesGuard } from './modules/auth/roles.guard';
   ],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {
+  // constructor(private dataSource: DataSource) {
 
-  }
+  // }
 }
