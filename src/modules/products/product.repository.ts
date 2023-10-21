@@ -57,6 +57,7 @@ export class ProductRepository implements IProductRepository {
         return false;
     }
 
+    // page = 2
     findProductHome(meta: MetaParams): Product[] {
         const limit = 3;
         const end = Number(meta.page) * limit;
