@@ -28,9 +28,10 @@ export class ProductRepository implements IProductRepository {
     create(data: Partial<Product>): Product {
         const product: Product = {
             id: Math.random(),
+            category_id: 2,
             ...data
         };
-        this.products.push(product);
+        this.products = [product, ...this.products];
         return product;
     }
 
