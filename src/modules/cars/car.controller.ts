@@ -1,12 +1,12 @@
-import { Controller, Get, Post, Put, Delete, Res, Body, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { ResponseData } from 'src/services/response.service';
-import { ResponseType } from 'src/constant/type';
-import { Role, ServerMessage, ServerStatus } from 'src/constant/enum';
-import { Car } from 'src/models/car.model';
-import { CarService } from './car.service';
-import { CarDto } from 'src/dto/car.dto';
 import { Roles } from 'src/constant/decorator';
+import { Role, ServerMessage, ServerStatus } from 'src/constant/enum';
+import { ResponseType } from 'src/constant/type';
+import { CarDto } from 'src/dto/car.dto';
+import { Car } from 'src/models/car.model';
+import { ResponseData } from 'src/services/response.service';
+import { CarService } from './car.service';
 
 @Controller('cars')
 export class CarController {

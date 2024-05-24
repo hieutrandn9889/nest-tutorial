@@ -45,6 +45,16 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Migration
+
+```bash
+# generate
+$ npm run migration:generate -- db/migrations/CreateRolesTable
+
+# run
+$ npm run migration:run
+```
+
 ## Test
 
 ```bash
