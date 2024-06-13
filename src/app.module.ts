@@ -17,12 +17,21 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { RolesGuard } from './modules/auth/roles.guard';
 import { dataSourceOptions } from 'db/data-source';
+import RoleEntity from './entities/role.entity';
+import UserEntity from './entities/user.entity';
+import { RoleModule } from './modules/roles/role.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       ...dataSourceOptions,
-      entities: [AccountsEntity, CarsEntity, CategoriesEntity],
+      entities: [
+        AccountsEntity,
+        CarsEntity,
+        CategoriesEntity,
+        RoleEntity,
+        UserEntity,
+      ],
     }),
     JwtModule.register({
       global: true,
@@ -33,6 +42,7 @@ import { dataSourceOptions } from 'db/data-source';
     CategoryModule,
     CarModule,
     AuthModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [

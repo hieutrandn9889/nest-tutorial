@@ -1,17 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
- 
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import UserEntity from './user.entity';
+
 @Entity()
 class RoleEntity {
-  @PrimaryGeneratedColumn('identity', {
-    generatedIdentity: 'ALWAYS',
-  })
+  @PrimaryGeneratedColumn('increment')
   id: number;
- 
+
   @Column()
-  title: string;
- 
+  name: string;
+
   @Column()
   content: string;
+
+  @OneToMany(() => UserEntity, (users) => users.role)
+  @JoinColumn()
+  users: UserEntity[];
 }
- 
+
 export default RoleEntity;
