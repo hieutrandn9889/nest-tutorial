@@ -9,6 +9,6 @@ export enum ServerMessage {
 };
 
 export enum Role {
-  User = 'ROLE_USER',
-  Admin = 'ROLE_ADMIN',
+  Teacher = 'TEACHER',
+  Admin = 'ADMIN',
 }

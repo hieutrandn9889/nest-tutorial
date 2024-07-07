@@ -10,12 +10,17 @@ export class CreateRoleData1717227532138 implements MigrationInterface {
       {
         id: 1,
         name: 'ADMIN',
-        content: 'QUAN_LY',
+        content: 'Quản lý',
       },
       {
         id: 2,
         name: 'STUDENT',
-        content: 'HOCVIEN',
+        content: 'Học viên',
+      },
+      {
+        id: 3,
+        name: 'TEACHER',
+        content: 'Giảng viên',
       },
     ]);
   }

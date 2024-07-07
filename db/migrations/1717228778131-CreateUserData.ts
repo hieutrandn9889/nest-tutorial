@@ -17,7 +17,37 @@ export class CreateUserData1717228778131 implements MigrationInterface {
             id: 2,
             name: 'TienKim',
             email: 'tienkim@gmail.com',
-            roleId: 1,
+            roleId: 2,
+          },
+          {
+            id: 3,
+            name: 'Nguyen Van A',
+            email: 'nguyenvana@gmail.com',
+            roleId: 3,
+          },
+          {
+            id: 4,
+            name: 'Nguyen Van B',
+            email: 'nguyenvanb@gmail.com',
+            roleId: 3,
+          },
+          {
+            id: 5,
+            name: 'Nguyen Van C',
+            email: 'nguyenvanc@gmail.com',
+            roleId: 3,
+          },
+          {
+            id: 6,
+            name: 'Nguyen Van D',
+            email: 'nguyenvand@gmail.com',
+            roleId: 3,
+          },
+          {
+            id: 7,
+            name: 'Nguyen Van E',
+            email: 'nguyenvanE@gmail.com',
+            roleId: 3,
           },
         ]);
     }

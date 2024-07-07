@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
+import * as bcrypt from 'bcrypt';
 import { AuthPayloadDto, AuthPermission, AuthResponseDto } from "src/dto/auth.dto";
 import { AccountsEntity } from "src/entities/accounts.entity";
 import { IAuthRepository } from "src/interfaces/IAuthRepository.interface";
 import { Repository } from "typeorm";
-import * as bcrypt from 'bcrypt';
-import { JwtService } from "@nestjs/jwt";
-import { jwtConstants } from "src/constant/constant";
 
 @Injectable()
 export class AuthRepository implements IAuthRepository {

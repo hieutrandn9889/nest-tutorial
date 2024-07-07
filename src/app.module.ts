@@ -20,6 +20,10 @@ import { dataSourceOptions } from 'db/data-source';
 import RoleEntity from './entities/role.entity';
 import UserEntity from './entities/user.entity';
 import { RoleModule } from './modules/roles/role.module';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './modules/auth/jwt.strategy';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -43,6 +47,10 @@ import { RoleModule } from './modules/roles/role.module';
     CarModule,
     AuthModule,
     RoleModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public')
+    })
   ],
   controllers: [AppController],
   providers: [
@@ -57,6 +65,7 @@ import { RoleModule } from './modules/roles/role.module';
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
+    JwtStrategy
   ],
 })
 export class AppModule {
